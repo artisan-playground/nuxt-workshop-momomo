@@ -1,12 +1,16 @@
 <template>
-  <a-menu mode="horizontal" class="nav">
-    <nuxt-link class="navbar-item" to="/login"
-      ><a-icon type="logout" />Log Out
-    </nuxt-link>
-  </a-menu>
+  <button class="navbar-item" @click="logout">Log Out</button>
 </template>
 
-<script></script>
+<script>
+  export default {
+    methods: {
+      logout() {
+        this.$store.commit('/user/logout')
+      }
+    }
+  }
+</script>
 
 <style>
 .nav {

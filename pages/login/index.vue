@@ -60,7 +60,7 @@
           </a-checkbox>
           <a class="login-form-forgot" href=""> Forgot password </a>
           <a-button type="primary" html-type="submit" class="login-form-button">
-            <nuxt-link class="navbar-item" to="/view-list"> Log in </nuxt-link>
+            Log in
           </a-button>
           Don't have an account?
           <nuxt-link class="navbar-item" to="/register">
@@ -79,7 +79,7 @@ export default {
     this.form = this.$form.createForm(this, { name: 'normal_login' })
   },
   mounted() {
-    this.getAllUser()
+    // this.getAllUser()
     console.log('Hello')
   },
   methods: {
@@ -88,14 +88,24 @@ export default {
       this.form.validateFields((err, values) => {
         if (!err) {
           console.log('Received values of form: ', values)
+          this.$axios.$post('/user/login', {
+            username: values.userName,
+            password: values.password
+          }).then(res => {
+            console.log("response: ", res);
+            this.$store.commit('user/login', res)
+            this.$router.push('/view-list')
+          }).catch(error => {
+            console.log("error: ", error);
+          })
         }
       })
     },
-    getAllUser() {
-      this.$axios.$get('/user/findAllUser', {}).then((data) => {
-        console.log('data:', data)
-      })
-    },
+    // getAllUser() {
+    //   this.$axios.$get('/user/findAllUser', {}).then((data) => {
+    //     console.log('data:', data)
+    //   })
+    // },
   },
 }
 </script>

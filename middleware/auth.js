@@ -17,7 +17,7 @@
 // import {Context} from '@nuxt/types'
 
 function auth({ route, store, redirect }) {
-  if (route.path !== '/login' && !store.state.user.userData) {
+  if (route.path !== '/login' && !store.state.user.user) {
     redirect('/login')
   }
 }
